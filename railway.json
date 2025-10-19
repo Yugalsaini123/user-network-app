@@ -1,0 +1,11 @@
+{
+  "build": {
+    "builder": "NIXPACKS",
+    "nixpacksConfig": {
+      "dir": "backend"
+    }
+  },
+  "deploy": {
+    "startCommand": "npm start"
+  }
+}

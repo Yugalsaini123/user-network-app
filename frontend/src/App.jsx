@@ -1,15 +1,14 @@
 // ==================== frontend/src/App.jsx ====================
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { ReactFlowProvider } from 'reactflow';
-import { fetchGraphData, undo, redo } from './store/userSlice';
-import { setEditingUser } from './store/uiSlice';
-import GraphCanvas from './components/GraphCanvas';
-import Sidebar from './components/Sidebar';
-import UserPanel from './components/UserPanel';
-import ErrorBoundary from './components/ErrorBoundary';
+import { fetchGraphData, undo, redo } from './store/userSlice.js';
+import { setEditingUser } from './store/uiSlice.js';
+import GraphCanvas from './components/GraphCanvas.jsx';
+import Sidebar from './components/Sidebar.jsx';
+import UserPanel from './components/UserPanel.jsx';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
+import { ToastContainer } from './components/CustomToast.jsx';
 import { UserPlus, Undo2, Redo2, RefreshCw } from 'lucide-react';
 import './App.css';
 
@@ -25,71 +24,59 @@ const App = () => {
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.ctrlKey || e.metaKey) {
-        if (e.key === 'z') {
+        if (e.key === 'z' && !e.shiftKey) {
           e.preventDefault();
           dispatch(undo());
-        } else if (e.key === 'y') {
+        } else if (e.key === 'y' || (e.key === 'z' && e.shiftKey)) {
           e.preventDefault();
           dispatch(redo());
         }
       }
     };
-
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [dispatch]);
 
-  const handleRefresh = () => {
-    dispatch(fetchGraphData());
-  };
-
-  const handleCreateUser = () => {
-    dispatch(setEditingUser('new'));
-  };
-
-  const canUndo = historyIndex > 0;
-  const canRedo = historyIndex < history.length - 1;
+  const handleRefresh = () => dispatch(fetchGraphData());
+  const handleCreateUser = () => dispatch(setEditingUser('new'));
+  const canUndoAction = historyIndex > 0;
+  const canRedoAction = historyIndex < history.length - 1;
 
   return (
     <ErrorBoundary>
       <div className="app-container">
         <header className="app-header">
-          <div className="header-left">
-            <h1 className="app-title">🌐 User Network Graph</h1>
-          </div>
+          <h1 className="app-title">🌐 User Network Graph</h1>
           
           <div className="header-actions">
-            <button
-              onClick={() => dispatch(undo())}
-              disabled={!canUndo}
-              className="icon-button"
+            <button 
+              onClick={() => dispatch(undo())} 
+              disabled={!canUndoAction} 
               title="Undo (Ctrl+Z)"
+              className="icon-button"
             >
               <Undo2 size={18} />
             </button>
             
-            <button
-              onClick={() => dispatch(redo())}
-              disabled={!canRedo}
-              className="icon-button"
+            <button 
+              onClick={() => dispatch(redo())} 
+              disabled={!canRedoAction} 
               title="Redo (Ctrl+Y)"
+              className="icon-button"
             >
               <Redo2 size={18} />
             </button>
             
-            <button
-              onClick={handleRefresh}
-              className="icon-button"
+            <button 
+              onClick={handleRefresh} 
+              disabled={loading} 
               title="Refresh"
-              disabled={loading}
+              className="icon-button"
             >
               <RefreshCw size={18} className={loading ? 'spin' : ''} />
             </button>
             
-            <button
-              onClick={handleCreateUser}
-              className="primary-button"
-            >
+            <button onClick={handleCreateUser} className="primary-button">
               <UserPlus size={18} />
               New User
             </button>
@@ -98,25 +85,15 @@ const App = () => {
 
         <main className="app-main">
           <Sidebar />
-          
           <div className="graph-container">
             <ReactFlowProvider>
               <GraphCanvas />
             </ReactFlowProvider>
           </div>
-          
           {showUserPanel && <UserPanel />}
         </main>
 
-        <ToastContainer
-          position="bottom-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          pauseOnHover
-          theme="light"
-        />
+        <ToastContainer />
       </div>
     </ErrorBoundary>
   );

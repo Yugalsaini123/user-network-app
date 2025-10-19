@@ -1,54 +1,27 @@
-//src/store/uiSlice.js
+// ==================== frontend/src/store/uiSlice.js ====================
 import { createSlice } from '@reduxjs/toolkit';
-
-const initialState = {
-  showUserPanel: false,
-  panelMode: null,
-  searchQuery: '',
-  filterHobby: null,
-  editingUser: null
-};
 
 const uiSlice = createSlice({
   name: 'ui',
-  initialState,
+  initialState: {
+    showUserPanel: false,
+    editingUser: null,
+    selectedEdge: null
+  },
   reducers: {
-    openCreatePanel: (state) => {
-      state.showUserPanel = true;
-      state.panelMode = 'create';
-      state.editingUser = null;
-    },
-    openEditPanel: (state, action) => {
-      state.showUserPanel = true;
-      state.panelMode = 'edit';
+    setEditingUser: (state, action) => {
       state.editingUser = action.payload;
+      state.showUserPanel = action.payload !== null;
     },
     closePanel: (state) => {
       state.showUserPanel = false;
-      state.panelMode = null;
       state.editingUser = null;
     },
-    setSearchQuery: (state, action) => {
-      state.searchQuery = action.payload;
-    },
-    setFilterHobby: (state, action) => {
-      state.filterHobby = action.payload;
-    },
-    setEditingUser: (state, action) => {
-      state.editingUser = action.payload;
-      state.showUserPanel = true;
-      state.panelMode = action.payload === 'new' ? 'create' : 'edit';
+    setSelectedEdge: (state, action) => {
+      state.selectedEdge = action.payload;
     }
   }
 });
 
-export const {
-  openCreatePanel,
-  openEditPanel,
-  closePanel,
-  setSearchQuery,
-  setFilterHobby,
-  setEditingUser
-} = uiSlice.actions;
-
+export const { setEditingUser, closePanel, setSelectedEdge } = uiSlice.actions;
 export default uiSlice.reducer;

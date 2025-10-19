@@ -4,5 +4,7 @@ export default {
   testMatch: ['**/tests/**/*.test.js'],
   collectCoverageFrom: ['src/**/*.js'],
   coveragePathIgnorePatterns: ['/node_modules/', '/tests/'],
-  verbose: true
+  verbose: true,
+  forceExit: true, 
+  detectOpenHandles: false  
 };

@@ -1,4 +1,4 @@
-# User Network Application - Cybernauts Assignment
+# User Network Application
 
 ## 🚀 Features Implemented
 
@@ -105,90 +105,9 @@ popularityScore = uniqueFriends + (sharedHobbies × 0.5)
 
 ## 📹 Demo Video
 
-[Link to demo video]
+[[Link to demo video](https://docs.google.com/videos/d/1RINH883N2zpltgJCDvt4CqsFQwTchhMFnDoIlaJExO0/play#scene=id.p)]
 
-## 📧 Contact
 
-Created for Cybernauts Development Assignment
 ```
 
----
 
-## 🎬 STEP 3: VIDEO SCRIPT (2-3 MINUTES)
-```
-[INTRO - 15 seconds]
-"Hello! I'm [Your Name], and this is my submission for the Cybernauts User Network Assignment. 
-Let me walk you through the features I've implemented."
-
-[BACKEND DEMO - 30 seconds]
-"Starting with the backend, I've built a complete REST API using Node.js and Express with MySQL database.
-The API handles all CRUD operations for users and friendships.
-*Show Postman or terminal with API calls*
-Key features include:
-- Automatic database initialization
-- Popularity score calculation
-- Circular friendship prevention
-- Delete protection for connected users"
-
-[FRONTEND DEMO - 60 seconds]
-"Now for the frontend - I've used React with Redux Toolkit and React Flow for visualization.
-
-*Click 'New User' button*
-First, let me create a user named Alice, age 25, with hobbies reading and gaming.
-*Create user*
-
-*Create another user*
-Now Bob, age 28, with hobbies gaming and cooking.
-
-*Drag node onto another*
-Watch how I can create friendships by dragging one node onto another.
-The connection appears instantly.
-
-*Show popularity score*
-Notice the popularity scores updating in real-time.
-Alice has 1 friend and shares gaming hobby with Bob, so her score is 1.5.
-
-*Drag hobby from sidebar*
-The sidebar shows all hobbies. I can drag 'reading' onto Bob's node to add it.
-*Drag and drop*
-See how the score updates immediately!
-
-*Show different node types*
-Users with scores above 5 get the green 'high score' node with a crown.
-Lower scores have blue nodes. These transition smoothly when scores change.
-
-*Try to delete*
-If I try to delete Alice while she has friendships...
-*Click delete*
-The system prevents it and shows an error message.
-
-*Show network stats panel*
-The stats panel shows total users, connections, and average score."
-
-[FEATURES HIGHLIGHT - 30 seconds]
-"Additional features include:
-- Undo/Redo functionality with keyboard shortcuts
-- Search and filter for hobbies
-- Toast notifications for all actions
-- Error boundary for crash prevention
-- Responsive design
-- Loading states and spinners
-
-*Show cluster mode in terminal*
-The backend also supports cluster mode for production scaling."
-
-[TESTING & DEPLOYMENT - 20 seconds]
-"I've included comprehensive tests covering:
-- User creation and validation
-- Popularity score calculation  
-- Friendship management
-- Delete protection
-
-*Run npm test*
-All tests passing with good coverage.
-
-The application is deployment-ready for Render with environment configuration."
-
-[CLOSING - 10 seconds]
-"Thank you for reviewing my submission. The code is well-organized, documented, 
-and production-ready. I'm excited about the opportunity to join Cybernauts!"
